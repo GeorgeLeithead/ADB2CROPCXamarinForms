@@ -74,7 +74,7 @@ This sample includes a sample API.
 1. With the file selected change the properties (Right-click and select 'Properties' OR press F4) "Build Action" to `Embeded Resource`.
 1. Edit the `AppSettings.json` file, and add the following content:
 
-```
+```json
 {
 	// WebApi
 	"ApiEndpoint": "localhost",

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	x:Class="ADB2CROPCXamarinForms.Views.MainPage"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="clr-namespace:ADB2CROPCXamarinForms.ViewModels"
+	Title="{Binding Title, Mode=OneTime}"
+	Shell.NavBarIsVisible="True"
+	Visual="Material"
+	mc:Ignorable="d">
+
+	<ContentPage.BindingContext>
+		<vm:MainViewModel />
+	</ContentPage.BindingContext>
+
+	<ContentPage.Content>
+		<StackLayout>
+			<Label
+				HorizontalOptions="FillAndExpand"
+				HorizontalTextAlignment="Center"
+				Text="MSAL Xamarin Forms Sample with ROPC"
+				VerticalOptions="Start" />
+			<BoxView
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"
+				Color="Transparent" />
+			<StackLayout Padding="5,10">
+				<StackLayout Orientation="Horizontal">
+					<Label FontAttributes="Bold" Text="Access Token: " />
+					<Label FontAttributes="Bold" Text="{Binding AccessToken}" />
+				</StackLayout>
+				<StackLayout Orientation="Horizontal">
+					<Label FontAttributes="Bold" Text="ExpiresOn: " />
+					<Label FontAttributes="Bold" Text="{Binding ExpiresOn}" />
+				</StackLayout>
+				<StackLayout Orientation="Horizontal">
+					<Label FontAttributes="Bold" Text="API Payload: " />
+					<Label Text="{Binding ApiResult}" />
+				</StackLayout>
+			</StackLayout>
+			<BoxView
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"
+				Color="Transparent" />
+			<Button
+				x:Name="btnCallApi"
+				Command="{Binding OnCallApiCommand}"
+				HorizontalOptions="FillAndExpand"
+				Text="Call API passing Bearer token"
+				VerticalOptions="End" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

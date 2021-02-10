@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	x:Class="ADB2CROPCXamarinForms.Views.SignInPage"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:converters="clr-namespace:ADB2CROPCXamarinForms.Converters"
+	xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="clr-namespace:ADB2CROPCXamarinForms.ViewModels"
+	BackgroundColor="{StaticResource PrimaryColor}"
+	Shell.NavBarIsVisible="False"
+	Visual="Material"
+	mc:Ignorable="d">
+
+	<ContentPage.Resources>
+		<Style TargetType="Entry">
+			<Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#999999}" />
+		</Style>
+		<Style TargetType="Button">
+			<Setter Property="HeightRequest" Value="66" />
+			<Setter Property="BackgroundColor" Value="{AppThemeBinding Light=OrangeRed, Dark=#FF3300}" />
+			<Setter Property="TextColor" Value="{AppThemeBinding Light=White, Dark=#333333}" />
+		</Style>
+		<Style TargetType="CheckBox">
+			<Setter Property="Color" Value="{AppThemeBinding Light=White, Dark=#333333}" />
+		</Style>
+		<Style TargetType="Label">
+			<Setter Property="TextColor" Value="{AppThemeBinding Light=White, Dark=#333333}" />
+		</Style>
+	</ContentPage.Resources>
+
+	<ContentPage.BindingContext>
+		<vm:SignInViewModel />
+	</ContentPage.BindingContext>
+
+	<ContentPage.Content>
+		<ScrollView>
+			<Grid RowDefinitions="*">
+				<StackLayout
+					Margin="30,0"
+					IsVisible="{Binding IsBusy, Converter={converters:BooleanConverter}}"
+					VerticalOptions="Center">
+					<ImageButton Margin="0,0,0,100" Aspect="AspectFill" />
+					<Entry Placeholder="Username" Text="{Binding UserName}" />
+					<Entry
+						IsPassword="True"
+						Placeholder="Password"
+						ReturnCommand="{Binding OnEnterPressedCommand}"
+						Text="{Binding Password}" />
+					<Button Command="{Binding SignInCommand, Mode=OneTime}" Text="SignIn" />
+					<StackLayout
+						HorizontalOptions="Center"
+						Orientation="Horizontal"
+						Spacing="0">
+						<CheckBox IsChecked="{Binding Remeber}" VerticalOptions="Center" />
+						<Label Text="Remember Me" VerticalTextAlignment="Center" />
+					</StackLayout>
+				</StackLayout>
+				<StackLayout
+					Margin="30,0"
+					HorizontalOptions="Center"
+					IsVisible="{Binding IsBusy}"
+					VerticalOptions="Center">
+					<ActivityIndicator
+						Margin="0,0,0,20"
+						d:IsRunning="True"
+						d:IsVisible="True"
+						HorizontalOptions="Center"
+						InputTransparent="True"
+						IsRunning="{Binding IsBusy}"
+						IsVisible="{Binding IsBusy}"
+						VerticalOptions="End" />
+					<Label Text="Signing in..." />
+				</StackLayout>
+			</Grid>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

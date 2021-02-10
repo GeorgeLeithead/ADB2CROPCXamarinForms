@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	x:Class="ADB2CROPCXamarinForms.Views.SettingsPage"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:vm="clr-namespace:ADB2CROPCXamarinForms.ViewModels"
+	Title="{Binding Title, Mode=OneTime}"
+	Shell.NavBarIsVisible="True"
+	Visual="Material"
+	mc:Ignorable="d">
+
+	<ContentPage.BindingContext>
+		<vm:SettingsViewModel />
+	</ContentPage.BindingContext>
+
+	<ContentPage.Content>
+		<StackLayout>
+			<Label
+				HorizontalOptions="CenterAndExpand"
+				Text="Welcome to Settings page"
+				VerticalOptions="CenterAndExpand" />
+			<Button Command="{Binding SignOutCommand}" Text="SignOut" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

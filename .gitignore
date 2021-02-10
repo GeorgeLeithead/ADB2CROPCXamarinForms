@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+src/[Mm]obile/*/[Aa]pp[Ss]ettings.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -348,3 +349,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/src/Mobile/ADB2CROPCXamarinForms/AppSettings.json

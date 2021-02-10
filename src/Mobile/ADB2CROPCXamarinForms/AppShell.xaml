@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+	x:Class="ADB2CROPCXamarinForms.AppShell"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:views="clr-namespace:ADB2CROPCXamarinForms.Views"
+	Shell.FlyoutBehavior="Disabled"
+	Shell.NavBarHasShadow="True"
+	Visual="Material">
+	<!--  Initial Login  -->
+	<ShellItem Route="SignIn">
+		<ShellContent ContentTemplate="{DataTemplate views:SignInPage}" />
+	</ShellItem>
+	<!--  Flyout Menu  -->
+	<!--
+	<FlyoutItem Title="Main" Route="main">
+		<ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+	</FlyoutItem>
+
+	<FlyoutItem Title="Settings" Route="settings">
+		<ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" />
+	</FlyoutItem>
+
+	<MenuItem Clicked="SignOut_Clicked" Text="SignOut" />	-->
+
+	<!--  TabBar  -->
+	<TabBar>
+		<Tab
+			Title="Main"
+			Icon="{StaticResource IconNews}"
+			Route="main">
+			<ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+		</Tab>
+		<Tab
+			Title="Settings"
+			Icon="{StaticResource IconSettings}"
+			Route="settings">
+			<ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" />
+		</Tab>
+	</TabBar>
+	<!--  Templates  -->
+	<Shell.FlyoutHeader>
+		<Grid Margin="0" BackgroundColor="#5561F9">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="{OnPlatform iOS=66, Default=0}" />
+				<RowDefinition Height="120" />
+			</Grid.RowDefinitions>
+
+			<Label Text="Azure AD B2C ROPC" />
+		</Grid>
+	</Shell.FlyoutHeader>
+</Shell>

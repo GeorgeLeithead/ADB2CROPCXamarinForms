@@ -1,6 +1,27 @@
-# ADB2CROPCXamarinForms
-This is a simple Xamarin Forms app showcasing how to use ROPC MSAL to authenticate users via Azure Active Directory B2C, and access a Web API with the resulting tokens.
+﻿# ADB2CROPCXamarinForms
+## Overview
+This is a simple Xamarin Forms app showcasing how to use MSAL with a ROPC (Resource Owner Password Credentials) flow, to authenticate users via Azure Active Directory B2C, and access an DOTNET CORE Web API with the resulting token.
+- For more information on Azure B2C, see the [Azure AD B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/overview) documentation.
+- For more information on ROPC flow, see the [Set up a resource owner password credentials flow in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/add-ropc-policy).
 
+### Prerequisites
+- You must have an existing Azure Active Directory B2C tenant. See [Create an Azure Active Directory B2C tenant](Docs/CreateAzureADB2CTenant.md) for details.
+- You must have created sign-in and ROPC policies within an Azure Active Directory B2C tenant. See [Create Policies](Docs/CreateAzureADB2CPolicies.md) for details.
+- You must have created Azure Active Directory B2C application registrations for the Web API service and mobile client.  See [Create App Registration](Docs/CreateAzureADB2CAppRegistrations.md) for details.
+- A user account in your Azure Active Directory B2C tenant. See [Import Azure AD B2C Users](Docs/ImportAzureADB2CUsers.md) for details.
+- [Visual Studio 2019](https://aka.ms/vsdownload). Install or update Visual Studio with the following workloads:
+	- Universal Windows Platform Development
+	- Mobile Development with .Net
+  
+	Then from the "Individual Components" tab, make sure these additional items are selected:
+	- Android SDK setup (API level 29)
+	- Windows 10 SDK (10.0.17134.0)
+	- Android SDK level 29, and Android SDK build tools 27.0.3 are also required. These are not installed through the VS Installer, so instead use the Android SDK Manager (Visual Studio > Tools > Android > Android SDK Manager�)
+- An Internet connection
+- A Windows, OS X, or Linux machine (necessary if you want to run the app on their respective platforms)
+- Setup [Xamarin.iOS for Visual Studio](https://docs.microsoft.com/en-us/xamarin/ios/get-started/installation/windows/introduction-to-xamarin-ios-for-visual-studio) (if you want to run the iOS app) - This will require Visual Studio on PC, and on a Mac Machine where XCode is installed.
+
+## Screenshots
 ![Sign In](ScreenShots/SignIn.png)
 ![Signing in](ScreenShots/SigninIn.png)
 ![Main Page](ScreenShots/MainPage.png)
@@ -8,26 +29,7 @@ This is a simple Xamarin Forms app showcasing how to use ROPC MSAL to authentica
 ![Sign In - Access denied](ScreenShots/SignIn_AccessDenied.png)
 ![Sign In - No Password](ScreenShots/SignIn_NoPassword.png)
 
-## Integrate Azure AD B2C into a Xamarin forms app using MSAL and ROPC
-This is a simple Xamarin Forms app showcasing how to use MSAL with a ROPC (Resource Owner Password Credentials) flow, to authenticate users via Azure Active Directory B2C,
-and access an DOTNET CORE Web API with the resulting token.
-- For more information on Azure B2C, see the [Azure AD B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/overview) documentation.
-- For more information on ROPC flow, see the [Set up a resource owner password credentials flow in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/add-ropc-policy).
-
 ## How To Run This Sample
-
-To run this sample you will need:
-- Visual Studio 2017
-- An Internet connection
-- An Azure AD B2C tenant
-- Exising users in your Azure AD B2C tenant
-
-If you don't have an Azure AD B2C tenant, you can follow [those instructions](https://azure.microsoft.com/documentation/articles/active-directory-b2c-get-started/) to create one. 
-
-*IMPORTANT*: This documentation is not YET complete!
-*IMPORTANT*: This documentation is not YET complete!
-*IMPORTANT*: This documentation is not YET complete!
-
 ### Step 1: Clone or download this repository
 
 From your shell or command line:
@@ -36,38 +38,18 @@ From your shell or command line:
 git clone https://github.com/GeorgeLeithead/ADB2CROPCXamarinForms.git
 ```
 
-### Step 2: Create your own policies
-This sample uses two types of policies: a sign-in policy, and a resource owner password credentials policy (ROPC).
-- Create the sign-in policy by following [the instructions here](https://azure.microsoft.com/documentation/articles/active-directory-b2c-reference-policies).  You may choose to include as many or as few identity providers as you wish.
-- Create the ROPC pilicy by following [the instructions here](https://docs.microsoft.com/en-us/azure/active-directory-b2c/add-ropc-policy#create-a-resource-owner-user-flow).  You may choose to include as many or as few identity providers as you wish.
-
-*IMPORTANT*: When setting up your identity providers, be sure to [set the redirect URLs](https://docs.microsoft.com/en-us/azure/active-directory-b2c/b2clogin) to use `b2clogin.com`.
-
-If you already have existing policies in your Azure AD B2C tenant, feel free to re-use those.  No need to create new ones just for this sample.
-
-### Step 3: Create your own Navite app
-Now you need to [register your native app in your B2C tenant](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-mobilenative-application), so that it has its own Application ID.
-
-Your native application registration should include the following information:
-
-- Enable the **Native Client** setting for your application.
-- Once your app is created, open the app's **Properties** blade and set the **Custom Redirect URI** for your app to `msal<Application Id>://auth`.
-- Once your app is created, open the app's **API access** blade and **Add** the API you created in the previous step.
-- Copy the Application ID generated for your application, so you can use it in the next step.
-
-
-### Step 4: Configure the Visual Studio Back-End project with your app coordinates.
+### Step 2: Configure the Visual Studio Back-End project with your app coordinates.
 This sample includes a sample API.
 1. Open the solution in Visual Studio.
 1. Open the `BackEnd\ADB2CROPCXamarinForms.HelloService\appsettings.json` file.
 1. Find the assignment for `AzureAdB2C:TenantId` and replace XXX with your tenant id.
 1. Find the assignment for `AzureAdB2C:Instance` and replace XXX with your Azure AD B2C tenant name.
-1. Find the assignment for `AzureAdB2C:ClientId` and replace XXX with the Application ID from step 3.
+1. Find the assignment for `AzureAdB2C:ClientId` and replace XXX with the Web API service Application ID.
 1. Find the assignment for `AzureAdB2C:Domain` and replace XXX with the Azure AD B2C tenant name.
-1. Find the assignment for `AzureAdB2C:SignedOutCallbackPath` and replace XXX the name of the sign-in policy your created in step 2.
-1. Find the assignment for `AzureAdB2C:SignUpSignInPolicyId` and replace XXX the name of the sign-in policy your created in step 2.
+1. Find the assignment for `AzureAdB2C:SignedOutCallbackPath` and replace XXX the name of the sign-in policy.
+1. Find the assignment for `AzureAdB2C:SignUpSignInPolicyId` and replace XXX the name of the sign-in policy.
 
-### Step 5: Configure the Visual Studio mobile application with your app coordinates.
+### Step 3: Configure the Visual Studio mobile application with your app coordinates.
 1. Open the solution in Visual Studio.
 1. Open the `Mobile\ADB2CROPCXamarinForms' project.
 1. Add a new JSON file to the project, called `AppSettings.json`.
@@ -95,25 +77,42 @@ This sample includes a sample API.
 ```
 1. Find the assignment for `TenantName` and replace XXX with your Azure AD B2C tenant name.
 1. Find the assignment for `TenantId` and replace XXX with your Azure AD B2C tenant name.
-1. Find the assignment for `ClientId` and replace XXX with the Application ID from step 3.
-1. Find the assignment for `PolicySignIn` and replace XXX the name of the sign-in policy your created in step 2.
-1. Find the assignment for `PolicyRopc` and replace XXX the name of the ROPC policy your created in step 2.
+1. Find the assignment for `ClientId` and replace XXX with the mobile client Application ID.
+1. Find the assignment for `PolicySignIn` and replace XXX the name of the sign-in policy.
+1. Find the assignment for `PolicyRopc` and replace XXX the name of the ROPC policy.
 
-### Step 6: Run the BackEnd
-From your shell or command line:
+### Step 4: Run a local instance if the BackEnd
+> :warning: When running a local *debug* version of the mobile application(s), it is required that a local instance of the back-end service is running *before* starting the mobile app in debug mode.
 
-```powershell
-cd .\ADB2CROPCXamarinForms\src\BackEnd\ADB2CROPCXamarinForms.HelloService
-dotnet build
-dotnet run
+The mobile project is configured to be able to run against 'local' instance of the back-end service.
+
+1. On Windows run PowerShell and navigate to the root of the cloned directory
+1. In PowerShell run:
+	```PowerShell
+	cd .\ADB2CROPCXamarinForms\src\BackEnd\ADB2CROPCXamarinForms.HelloService
+	dotnet build
+	dotnet run
+	```
+1. The service can be accesses via the URLs as indicated by the build info.  For example in the following this would be https://localhost:5001 and http://localhost:5000:
+```Text
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: https://localhost:5001
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: .\ADB2CROPCXamarinForms\src\BackEnd\ADB2CROPCXamarinForms.HelloService
 ```
 
-### Step 7: Run the mobile app
-TODO: Write this so that it's not platform specific!!! Currently I have only tested using the Android emulator!!!
+1. When finished using the local instance of the service, press `CTRL+C`
 
-1. Choose the platform you want to work on (Android) by setting the startup project in the Solution Explorer.  Make sure that your platform of choice is marked for build and deploy in the Configuration Manager.
+### Step 5: Run the mobile app
+1. Choose the platform you want to work on by setting the startup project in the Solution Explorer.  Make sure that your platform of choice is marked for build and deploy in the Configuration Manager.
 1. Clean the solution, rebuild the solution, and run it.
-1. On the Sign-in page, enter the sign-in username and password of a known Azure AD b2C tenant user, and click the sign-in button.  Upon successful sign in, the application screen will list the access token and expires on for the authenticated user and show ba button that allows you to call an API.
+1. On the Sign-in page, enter the sign-in username and password of a known Azure AD B2C tenant user, and click the sign-in button.  Upon successful sign in, the application screen will display the `access token` and `expires on` for the authenticated user and show a button that allows you to call an API.
 1. Close the application and reopen it.  You will see that the app retains access to the API and retrieves the access token and expires on information right away, without the need to sign in again.
 1. Sign out by click the `Settings` tab and then the `Sign out` button.
 
@@ -121,40 +120,15 @@ TODO: Write this so that it's not platform specific!!! Currently I have only tes
 
 If you have issues with the Android emulator, please refer to [this document](https://github.com/Azure-Samples/active-directory-general-docs/blob/master/AndroidEmulator.md) for instructions on how to ensure that your emulator supports the features required by MSAL.
 
-### Android specific considerations
-
-The platform specific projects require only a couple of extra lines to accommodate for individual platform differences.
-
-UserDetailsClient.Droid requires one extra line in the `MainActivity.cs` file.
-In `OnActivityResult`, we need to add
-
-```csharp
-AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
-
-```
-That line ensures that control goes back to MSAL once the interactive portion of the authentication flow ended.
-
-### iOS specific considerations
-
-UserDetailsClient.iOS only requires one extra line, in AppDelegate.cs.
-You need to ensure that the OpenUrl handler looks as the snippet below:
-
-```csharp
-public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-{
-    AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
-    return true;
-}
-```
-
-Once again, this logic is meant to ensure that once the interactive portion of the authentication flow is concluded, the flow goes back to MSAL.
-
-In order to make the token cache work and have the `AcquireTokenSilentAsync` work multiple steps must be followed :
-
-1. Enable Keychain access in your `Entitlements.plist` file and specify in the **Keychain Groups** your bundle identifier.
-1. In your project options, on iOS **Bundle Signing view**, select your `Entitlements.plist` file for the Custom Entitlements field.
-1. When signing a certificate, make sure XCode uses the same Apple Id. 
-
 ## More information
-
-For more information on Azure B2C, see [the Azure AD B2C documentation homepage](http://aka.ms/aadb2c). 
+- For more information on Azure B2C, see [the Azure AD B2C documentation homepage](http://aka.ms/aadb2c).
+- [Configure session behavior in Azure Active Directory B2C](https://docs.microsoft.com/en-us/azure/active-directory-b2c/session-behavior)
+- For a faster Android emulator, consider [using with Hyper-V](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/hardware-acceleration?pivots=windows). This might require turning on Virtualization in BIOS settings of your PC.
+- [Managing Virtual Devices with the Android Device Manager](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/device-manager).
+- For more information on acquiring tokens with MSAL.NET, please visit [MSAL.NET's conceptual documentation](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki), in particular:
+	- [PublicClientApplication](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Client-Applications#publicclientapplication)
+	- [Recommended call pattern in public client applications](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/AcquireTokenSilentAsync-using-a-cached-token#recommended-call-pattern-in-public-client-applications)
+	- [Acquiring tokens interactively in public client application flows](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Acquiring-tokens-interactively)
+- To understand more about the Microsoft identity platform endpoint see http://aka.ms/aaddevv2
+- For more information about how the protocols work in this scenario and other scenarios, see [Authentication Scenarios for Microsoft identity platform](http://go.microsoft.com/fwlink/?LinkId=394414).
+- For more information about Microsoft Graph, please visit [the Microsoft Graph homepage](https://graph.microsoft.io/en-us/)

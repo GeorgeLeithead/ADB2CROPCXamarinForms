@@ -350,3 +350,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /src/Mobile/ADB2CROPCXamarinForms/AppSettings.json
+/AppCreationScripts/createdApps.html
+/AppCreationScripts/ImportedUsers.html

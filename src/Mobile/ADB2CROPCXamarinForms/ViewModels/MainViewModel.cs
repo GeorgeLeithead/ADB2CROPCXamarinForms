@@ -84,6 +84,11 @@ namespace ADB2CROPCXamarinForms.ViewModels
 				}
 				else
 				{
+					if (string.IsNullOrEmpty(responseString))
+					{
+						responseString = response.ToString();
+					}
+
 					this.ApiResult = $"Error calling API {this.serviceUrl} | {responseString}";
 				}
 			}
